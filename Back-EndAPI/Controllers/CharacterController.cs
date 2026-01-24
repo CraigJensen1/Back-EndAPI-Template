@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class CharacterController : ControllerBase
 {
     private readonly CharacterService _chacterService;
@@ -11,7 +11,7 @@ public class CharacterController : ControllerBase
         _chacterService = chacterService;
     }
 
-    [HttpGet]
+    [HttpGet("characters")]
     public async Task<IActionResult> Get()
     {
         var characters = await _chacterService.GetCharactersAsync();

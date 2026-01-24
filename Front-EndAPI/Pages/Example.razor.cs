@@ -7,7 +7,7 @@ public class ExampleBase : ComponentBase
     [Inject]
     protected HttpClient Http { get; set; } = default!;
 
-    protected CharacterEntity? example;
+    protected List<CharacterEntity> characters;
 
     protected override async Task OnInitializedAsync()
     {
@@ -16,6 +16,6 @@ public class ExampleBase : ComponentBase
 
     protected async Task LoadExample()
     {
-        example = await Http.GetFromJsonAsync<CharacterEntity>("Example/items") ?? new();
+        characters = await Http.GetFromJsonAsync<List<CharacterEntity>>("character/characters") ?? new();
     }
 }

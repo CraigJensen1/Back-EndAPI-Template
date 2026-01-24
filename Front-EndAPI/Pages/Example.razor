@@ -4,14 +4,18 @@
 
 <h3>Example Item</h3>
 
-@if (example == null)
+@if (characters == null)
 {
     <p>Loading...</p>
 }
 else
 {
-    <p><strong>ID:</strong> @example.Id</p>
-    <p><strong>Name:</strong> @example.Name</p>
+    foreach (var character in characters)
+    {
+        <p><strong>ID:</strong> @character.Id</p>
+        <p><strong>Name:</strong> @character.Name</p>
+    }
+
 }
 
 <button class="btn btn-primary" @onclick="LoadExample">Reload</button>

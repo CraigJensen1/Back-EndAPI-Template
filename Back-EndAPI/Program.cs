@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services
@@ -13,7 +15,29 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod());
 });
 
+// REGISTER EF CORE
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    ));
+
+// REGISTER YOUR HERO SERVICE
+builder.Services.AddScoped<CharacterService>();  // <--- THIS LINE
+
 var app = builder.Build();
+
+// TEMP DB TEST (optional)
+using (var scope = app.Services.CreateScope())
+{
+    var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+    var connString = config.GetConnectionString("DefaultConnection");
+
+    using var conn = new Npgsql.NpgsqlConnection(connString);
+    conn.Open();
+
+    Console.WriteLine("Connected to Postgres!");
+}
+
 app.UseCors();
 
 // Pipeline
@@ -26,5 +50,4 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-
 app.Run();

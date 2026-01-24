@@ -1,5 +1,4 @@
-﻿using ClassLibrary.Models;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 
 public class ExampleBase : ComponentBase
@@ -7,7 +6,7 @@ public class ExampleBase : ComponentBase
     [Inject]
     protected HttpClient Http { get; set; } = default!;
 
-    protected Example? example;
+    //protected Example? example;
 
     protected override async Task OnInitializedAsync()
     {

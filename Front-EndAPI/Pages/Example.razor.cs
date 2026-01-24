@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using ClassLibrary.Entities;
+using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 
 public class ExampleBase : ComponentBase
@@ -6,7 +7,7 @@ public class ExampleBase : ComponentBase
     [Inject]
     protected HttpClient Http { get; set; } = default!;
 
-    //protected Example? example;
+    protected CharacterEntity? example;
 
     protected override async Task OnInitializedAsync()
     {
@@ -15,6 +16,6 @@ public class ExampleBase : ComponentBase
 
     protected async Task LoadExample()
     {
-        example = await Http.GetFromJsonAsync<Example>("Example/items") ?? new();
+        example = await Http.GetFromJsonAsync<CharacterEntity>("Example/items") ?? new();
     }
 }

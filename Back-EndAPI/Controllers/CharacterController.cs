@@ -1,20 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClassLibrary.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
 public class CharacterController : ControllerBase
 {
-    private readonly CharacterService _chacterService;
+    private readonly CharacterService _characterService;
 
-    public CharacterController(CharacterService chacterService)
+    public CharacterController(CharacterService characterService)
     {
-        _chacterService = chacterService;
+        _characterService = characterService;
     }
 
+    // Controller returns DTOs
     [HttpGet("characters")]
-    public async Task<IActionResult> Get()
+    public async Task<ActionResult<List<CharacterDTO>>> Get()
     {
-        var characters = await _chacterService.GetCharactersAsync();
+        var characters = await _characterService.GetCharactersAsync();
         return Ok(characters);
     }
 }

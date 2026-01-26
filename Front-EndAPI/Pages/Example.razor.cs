@@ -1,4 +1,4 @@
-﻿using ClassLibrary.Entities;
+﻿using ClassLibrary.DTOs;
 using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 
@@ -7,15 +7,19 @@ public class ExampleBase : ComponentBase
     [Inject]
     protected HttpClient Http { get; set; } = default!;
 
-    protected List<CharacterEntity> characters;
+    // UI uses DTOs — never entities
+    protected List<CharacterDTO> Characters = new();
 
     protected override async Task OnInitializedAsync()
     {
-        await LoadExample();
+        await LoadCharacters();
     }
 
-    protected async Task LoadExample()
+    protected async Task LoadCharacters()
     {
-        characters = await Http.GetFromJsonAsync<List<CharacterEntity>>("character/characters") ?? new();
+        Characters =
+            await Http.GetFromJsonAsync<List<CharacterDTO>>(
+                "character/characters"
+            ) ?? new();
     }
 }

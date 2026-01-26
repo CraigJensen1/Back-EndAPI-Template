@@ -1,13 +1,15 @@
-﻿
-// DTO - Data Transfer Object matches the UI needs, not the database exactly
-namespace ClassLibrary.DTOs;
-
-public class CharacterDTO
+﻿namespace ClassLibrary.DTOs
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public string Class { get; set; }
-    public int Level { get; set; }
-    public int Health { get; set; }
-    public int Mana { get; set; }
+    // DTO = what the frontend is allowed to see
+    // No DB attributes
+    // No EF Core references
+    public class CharacterDTO
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Class { get; set; } = string.Empty;
+        public int Level { get; set; }
+        public int Health { get; set; }
+        public int Mana { get; set; }
+    }
 }

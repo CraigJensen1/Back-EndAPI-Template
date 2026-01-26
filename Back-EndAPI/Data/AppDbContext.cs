@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<CharacterEntity> characters => Set<CharacterEntity>();
+    // DbSet = a table
+    // EF uses this to generate SQL
+    public DbSet<CharacterEntity> Characters => Set<CharacterEntity>();
 
     public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)

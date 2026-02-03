@@ -22,7 +22,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     ));
 
 // REGISTER YOUR HERO SERVICE
-builder.Services.AddScoped<CharacterService>();  // <--- THIS LINE
+builder.Services.AddScoped<CharacterService>();
+
+
+
+
 
 var app = builder.Build();
 
@@ -31,10 +35,8 @@ using (var scope = app.Services.CreateScope())
 {
     var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
     var connString = config.GetConnectionString("DefaultConnection");
-
     using var conn = new Npgsql.NpgsqlConnection(connString);
     conn.Open();
-
     Console.WriteLine("Connected to Postgres!");
 }
 

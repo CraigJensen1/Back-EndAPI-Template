@@ -3,12 +3,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ClassLibrary.Entities
 {
-    // This class represents EXACTLY how the database table looks
-    // It is NOT meant to be sent to the UI
-    [Table("character")]
+    //
+    // ENTITY ROLE
+    // ------------
+    // Entities represent DATABASE TABLES.
+    //
+    // Entities:
+    // - Match the database schema exactly
+    // - Use attributes for column mapping
+    // - Are NOT safe to return to the frontend
+    //
+    // Changing this class usually means changing the database.
+    //
+
+    [Table("character")] // Maps this class to the "character" table
     public class CharacterEntity
     {
-        [Key]
+        [Key] // Primary key
         [Column("hero_id")]
         public Guid Id { get; set; }
 
@@ -27,8 +38,7 @@ namespace ClassLibrary.Entities
         [Column("mana")]
         public int Mana { get; set; }
 
-        // Notice: this exists in the DB but NOT in the DTO
-        // UI does not need it
+        // Exists in the database but NOT exposed to the client
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }
     }

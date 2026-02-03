@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Components;
 using System.Net.Http.Json;
 
-public class ExampleBase : ComponentBase
+public class IndexBase : ComponentBase
 {
     [Inject]
     protected HttpClient Http { get; set; } = default!;
 
-    // UI uses DTOs — never entities
+    // UI only knows about DTOs
     protected List<CharacterDTO> Characters = new();
 
     protected override async Task OnInitializedAsync()
@@ -17,9 +17,6 @@ public class ExampleBase : ComponentBase
 
     protected async Task LoadCharacters()
     {
-        Characters =
-            await Http.GetFromJsonAsync<List<CharacterDTO>>(
-                "character/characters"
-            ) ?? new();
+        Characters = await Http.GetFromJsonAsync<List<CharacterDTO>>("api/characters");
     }
 }

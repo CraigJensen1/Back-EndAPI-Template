@@ -17,7 +17,7 @@ namespace ClassLibrary.Entities
     //
 
     [Table("character")] // Maps this class to the "character" table
-    public class CharacterEntity
+    public class EXCharacter
     {
         [Key] // Primary key
         [Column("hero_id")]

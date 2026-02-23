@@ -40,6 +40,7 @@ public class CharactersController
     [HttpPost("{id}/levelup")]
     public async Task<IActionResult> LevelUp(Guid id)
     {
+        //
         await _characterService.LevelUpAsync(id);
         return NoContent();
     }

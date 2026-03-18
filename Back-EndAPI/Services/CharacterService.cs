@@ -17,7 +17,7 @@ public class CharacterService : CrudService<Character>
         character.Level++;
         character.Health += 10;
         character.Mana += 5;
-
+        //
         await SaveAsync();
     }
 
